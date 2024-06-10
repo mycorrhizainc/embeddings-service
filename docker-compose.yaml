@@ -1,0 +1,29 @@
+# port=7997
+# model1=michaelfeil/bge-small-en-v1.5
+# model2=mixedbread-ai/mxbai-rerank-xsmall-v1
+# volume=$PWD/data
+# 
+# docker run -it --gpus all \
+#  -v $volume:/app/.cache \
+#  -p $port:$port \
+#  michaelf34/infinity:latest \
+#  v2 \
+#  --model-id $model1 \
+#  --model-id $model2 \
+#  --port $port
+services:
+  infinity:
+    image: michaelf34/infinity:latest
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: [ "0" ]
+              capabilities: [ gpu ]
+    command: infinity_emb v2 --model-id $MODEL_ID --port 7997
+    ports:
+      - 7997:7997
+    env:
+      - MODEL_ID=Alibaba-NLP/gte-large-en-v1.5
+    restart: always
