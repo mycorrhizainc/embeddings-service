@@ -24,6 +24,8 @@ services:
               device_ids: [ "0" ]
               capabilities: [ gpu ]
     command: infinity_emb v2 --model-id Alibaba-NLP/gte-large-en-v1.5 --port 7997
+    volumes:
+      - "./volumes/cache:/app/.cache"
     ports:
       - 7997:7997
     restart: always
