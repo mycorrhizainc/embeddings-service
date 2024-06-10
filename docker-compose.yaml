@@ -14,6 +14,8 @@
 services:
   infinity:
     image: michaelf34/infinity:latest
+    env:
+      - MODEL_ID=Alibaba-NLP/gte-large-en-v1.5
     deploy:
       resources:
         reservations:
@@ -24,6 +26,4 @@ services:
     command: infinity_emb v2 --model-id $MODEL_ID --port 7997
     ports:
       - 7997:7997
-    env:
-      - MODEL_ID=Alibaba-NLP/gte-large-en-v1.5
     restart: always
